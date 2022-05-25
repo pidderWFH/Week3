@@ -2,31 +2,43 @@ const mongoose = require("mongoose");
 
 // schema 開始 
 const postSchema = new mongoose.Schema(
-    {
-      content: {
-        type: String,
-        //必填加入required
-        required: [true, 'Content 未填寫']
-      },
-      image: {
-        type:String,
-        default:""
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now(),
-        //db.posts.find() 不會顯示此資料
-        select: false
-      },
-      name: {
-          type: String,
-          required: [true, '貼文姓名未填寫']
-      },
-      likes: {
-          type:Number,
-          default:0
-        }
+  {
+    content: {
+      type: String,
+      //必填加入required
+      required: [true, '內文未填寫']
+    },
+    image: {
+      type:String,
+      default:""
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      //db.posts.find() 不會顯示此資料
+      select: false
+    },
+    name: {
+      type: String,
+      required: [true, '貼文姓名未填寫']
+    },
+    likes: {
+      type: Number,
+      default:0
+    },
+    tags: {
+      type: String,
+      required: [true, "貼文標籤未填寫"]
+    },
+    type: {
+      type: String,
+      enum: [ "group", "person"],
+      required: [true, "貼文類型未填寫"]    
     }
+  },
+  {
+    versionKey : false
+  }
 );
 //model collection 會自動將第一個字母小寫並且會變成複數(+s)
 //postSchema 規範資料格式
