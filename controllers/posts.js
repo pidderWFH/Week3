@@ -41,7 +41,7 @@ const posts = {
             deleteOne = await Post.findByIdAndDelete(id);
     
             if (deleteOne){
-                const post = await Post.find(id);
+                const post = await Post.find();
                 serviceHandle.handleSucess(res, post);
             }else{
                 serviceHandle.handleError(res, 402, "查無此ID")
@@ -66,7 +66,7 @@ const posts = {
             if (patchPost === null){
                 return serviceHandle.handleError(res, 402, "查無此ID");
             }else {
-                const post = await Post.findOne({_id: id});
+                const post = await Post.findOne({ _id: id });
                 serviceHandle.handleSucess(res, post);
             } 
         } catch (err) {
